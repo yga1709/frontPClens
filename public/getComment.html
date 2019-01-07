@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.7.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.7.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.7.2/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <input type="text" id="url" />URL<br />
+    <input type="button" id="get" value="取得" />
+    <div id="listComment"></div>
+    <script src="./src/getDB.js"></script>
+  </body>
+</html>
