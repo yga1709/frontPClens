@@ -11,13 +11,24 @@
     <script defer src="/__/firebase/init.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-    <title>Document</title>
+    <title>PClens</title>
   </head>
 
   <body>
     <input type="text" id="url" />URL<br />
     <input type="text" id="name" />名前
-    <input type="text" id="comment" />コメント
+    <input type="text" id="comment" />コメント<br />
+    <form id="color">
+      <input name="colorList" type="radio" value="#ffffff" checked />白
+      <input name="colorList" type="radio" value="#ff0000" />赤
+      <input name="colorList" type="radio" value="#000000" />黒
+      <input name="colorList" type="radio" value="#0000ff" />青
+    </form>
+    <form id="position">
+      <input name="posiList" type="radio" value="ue" />上
+      <input name="posiList" type="radio" value="shita" />下
+      <input name="posiList" type="radio" value="naka" checked />通常
+    </form>
     <input type="button" id="send" value="送信" />
     <script src="./src/auth.js"></script>
     <script src="./src/send.js"></script>
