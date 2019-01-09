@@ -1,5 +1,5 @@
-document.getElementById("get").onclick = () => {
-  let nico = new nicoJS({
+nicoComment = (comment, color, size, position) => {
+  const nico = new nicoJS({
     app: document.getElementById("app"),
     width: 600,
     height: 400,
@@ -7,6 +7,11 @@ document.getElementById("get").onclick = () => {
     color: "#fff" // opt
   });
   nico.listen();
+  nico.send(comment,color,size,position);
+}
+
+document.getElementById("get").onclick = () => {
+
   const url = document.getElementById("url").value;
 
   db.collection("pclens")
@@ -15,11 +20,7 @@ document.getElementById("get").onclick = () => {
       snapshot.docChanges().forEach(change => {
         if (change.type === "added") {
           console.log(change.doc.data());
-          nico.send(
-            change.doc.data().comment,
-            change.doc.data().color,
-            change.doc.data().position
-          );
+          nicoComment(change.doc.data().comment,change.doc.data().color,change.doc.data().size,change.doc.data().position);
         }
       });
     });

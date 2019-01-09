@@ -3,8 +3,10 @@ document.getElementById("send").onclick = () => {
   const comment = document.getElementById("comment").value;
   const url = document.getElementById("url").value;
   const getColor = document.getElementById("color");
+  const getSize = document.getElementById("size");
   const getPosition = document.getElementById("position");
   const color = getColor.colorList.value;
+  const size = getSize.sizeList.value;
   const position = getPosition.posiList.value;
   let scroll = window.pageYOffset;
 
@@ -14,6 +16,7 @@ document.getElementById("send").onclick = () => {
       comment: comment,
       url: url,
       color: color,
+      size: size,
       position: position,
       scroll: scroll
     })
