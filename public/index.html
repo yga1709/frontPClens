@@ -11,6 +11,7 @@
     <script defer src="/__/firebase/init.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
     <title>PClens</title>
   </head>
 
@@ -19,20 +20,21 @@
     <input type="text" id="name" />名前
     <input type="text" id="comment" />コメント<br />
     <form id="color">
-      <input name="colorList" type="radio" value="#000000" checked/>黒
+      <input name="colorList" type="radio" value="#000000" checked />黒
       <input name="colorList" type="radio" value="#ffffff" />白
       <input name="colorList" type="radio" value="#ff0000" />赤
       <input name="colorList" type="radio" value="#0000ff" />青
     </form>
     <form id="size">
-      <input name="sizeList" type="radio" value=50 checked />通常
-      <input name="sizeList" type="radio" value=100 />大
-      <input name="sizeList" type="radio" value=25  />小
+      <input name="sizeList" type="radio" value="50" checked />通常
+      <input name="sizeList" type="radio" value="100" />大
+      <input name="sizeList" type="radio" value="25" />小
     </form>
     <form id="position">
-      <input name="posiList" type="radio" value="naka" checked />通常
-      <input name="posiList" type="radio" value="ue" />上
-      <input name="posiList" type="radio" value="shita" />下
+      <input name="posiList" type="radio" value="top" checked />上部
+      <input name="posiList" type="radio" value="center" />中央
+      <input name="posiList" type="radio" value="bottom" />下部
+      <input name="posiNum" type="number" id="posiNum" />数値を指定する。
     </form>
 
     <input type="button" id="send" value="送信" />
