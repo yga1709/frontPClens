@@ -1,13 +1,20 @@
+window.onload = () => {
+  console.log(uid, isAnonymous);
+};
 document.getElementById("send").onclick = () => {
+  if (!isAnonymous) {
+    return 0;
+  }
   const name = document.getElementById("name").value;
   const comment = document.getElementById("comment").value;
   const url = document.getElementById("url").value;
   const getColor = document.getElementById("color");
   const getSize = document.getElementById("size");
   const getPosition = document.getElementById("position");
+  const userPosition = document.getElementById("posiNum").value;
   const color = getColor.colorList.value;
   const size = getSize.sizeList.value;
-  const position = getPosition.posiList.value;
+  let position = getPosition.posiList.value;
   let scroll = window.pageYOffset;
 
   db.collection("pclens")
@@ -17,8 +24,9 @@ document.getElementById("send").onclick = () => {
       url: url,
       color: color,
       size: size,
+      scroll: scroll,
       position: position,
-      scroll: scroll
+      uid: uid
     })
     .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);
