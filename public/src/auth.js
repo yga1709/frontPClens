@@ -9,3 +9,25 @@ const config = {
 firebase.initializeApp(config);
 
 var db = firebase.firestore();
+var isAnonymous;
+var uid;
+
+firebase
+  .auth()
+  .signInAnonymously()
+  .catch(error => {
+    // Handle Errors here.
+    let errorCode = error.code;
+    let errorMessage = error.message;
+    // ...
+    console.log(errorCode, errorMessage);
+  });
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // User is signed in.
+    isAnonymous = user.isAnonymous;
+    uid = user.uid;
+    // ...
+  }
+});
