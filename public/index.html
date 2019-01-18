@@ -26,13 +26,25 @@
         v-model="message"
         placeholder="URLを入力…"
         type="text"
-        class="uk-input"
+        class="uk-input uk-form-width-medium"
+        style="width:100px"
         id="url"
       /><br />
       <p>{{ message }}</p>
     </span>
-    名前<br /><input type="text" class="uk-input" id="name" /><br />
-    コメント<br /><input type="text" class="uk-input" id="comment" /><br />
+    名前<br /><input
+      type="text"
+      width="100"
+      style="width:100px"
+      class="uk-input uk-form-width-medium"
+      id="name"
+    /><br />
+    コメント<br /><input
+      type="text"
+      style="width:100px"
+      class="uk-input uk-form-width-medium"
+      id="comment"
+    /><br />
     <form id="color">
       <input
         name="colorList"
