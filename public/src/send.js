@@ -15,7 +15,27 @@ document.getElementById("send").onclick = () => {
   const color = getColor.colorList.value;
   const size = getSize.sizeList.value;
   let position = getPosition.posiList.value;
-  let scroll = window.pageYOffset;
+
+  if (name === "" || comment === "" || url === "") {
+    success.show = true;
+    success.success = false;
+  }
+
+  if (userPosition === null) {
+    switch (position) {
+      case top:
+        position = 0;
+        break;
+      case center:
+        position = 100;
+        break;
+      case buttom:
+        position = 500;
+        break;
+    }
+  } else {
+    position = Number(userPosition);
+  }
 
   db.collection("pclens")
     .add({
@@ -24,14 +44,29 @@ document.getElementById("send").onclick = () => {
       url: url,
       color: color,
       size: size,
-      scroll: scroll,
-      position: position,
+      scroll: position,
       uid: uid
     })
     .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
+      console.log(name, comment, url, color, size, scroll, position, uid);
+      success.show = true;
     })
     .catch(function(error) {
       console.error("Error adding document: ", error);
+      success.show = true;
+      success.success = false;
+      success.message = error;
     });
 };
+
+const app = new Vue({
+  el: "#checkURL"
+});
+
+const success = new Vue({
+  el: "#result",
+  data: {
+    show: false,
+    success: true
+  }
+});

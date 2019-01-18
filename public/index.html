@@ -2,43 +2,101 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/5.7.2/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/5.7.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/5.7.2/firebase-firestore.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css"
+    />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/js/uikit-icons.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>PClens</title>
   </head>
 
   <body>
-    <input type="text" id="url" />URL<br />
-    <input type="text" id="name" />名前
-    <input type="text" id="comment" />コメント<br />
+    <h1 class="uk-heading-bullet">PC-lens</h1>
+    <br />
+    <span id="checkURL">
+      URL<br /><input
+        v-model="message"
+        placeholder="URLを入力…"
+        type="text"
+        class="uk-input"
+        id="url"
+      /><br />
+      <p>{{ message }}</p>
+    </span>
+    名前<br /><input type="text" class="uk-input" id="name" /><br />
+    コメント<br /><input type="text" class="uk-input" id="comment" /><br />
     <form id="color">
-      <input name="colorList" type="radio" value="#000000" checked />黒
-      <input name="colorList" type="radio" value="#ffffff" />白
-      <input name="colorList" type="radio" value="#ff0000" />赤
-      <input name="colorList" type="radio" value="#0000ff" />青
+      <input
+        name="colorList"
+        type="radio"
+        class="uk-radio"
+        value="#000000"
+        checked
+      />黒
+      <input name="colorList" type="radio" class="uk-radio" value="#ffffff" />白
+      <input name="colorList" type="radio" class="uk-radio" value="#ff0000" />赤
+      <input name="colorList" type="radio" class="uk-radio" value="#0000ff" />青
     </form>
     <form id="size">
-      <input name="sizeList" type="radio" value="40px" checked />通常
-      <input name="sizeList" type="radio" value="60px" />大
-      <input name="sizeList" type="radio" value="20px" />小
+      <input
+        name="sizeList"
+        type="radio"
+        class="uk-radio"
+        value="40px"
+        checked
+      />通常
+      <input name="sizeList" type="radio" class="uk-radio" value="60px" />大
+      <input name="sizeList" type="radio" class="uk-radio" value="20px" />小
     </form>
     <form id="position">
-      <input name="posiList" type="radio" value="top" checked />上部
-      <input name="posiList" type="radio" value="center" />中央
-      <input name="posiList" type="radio" value="bottom" />下部
+      <input
+        name="posiList"
+        type="radio"
+        class="uk-radio"
+        value="top"
+        checked
+      />上部
+      <input name="posiList" type="radio" class="uk-radio" value="center" />中央
+      <input name="posiList" type="radio" class="uk-radio" value="bottom" />下部
       <input name="posiNum" type="number" id="posiNum" />数値を指定する。
     </form>
 
-    <input type="button" id="send" value="送信" />
+    <input
+      type="button"
+      class="uk-button uk-button-primary"
+      id="send"
+      value="送信"
+    />
+    <div id="result">
+      <div v-show="show">
+        <div v-if="success" class="uk-alert-success" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>送信が完了しました。</p>
+        </div>
+        <div v-else="error" class="uk-alert-danger" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>送信できませんでした。</p>
+        </div>
+      </div>
+    </div>
+    <h1 class="uk-heading-bullet">コメント一覧</h1>
+    <div id="showComment">
+      <ul>
+        <li v-for="item in list">
+          {{ item.url }}<br />{{ item.name }}:{{ item.comment }}
+        </li>
+      </ul>
+    </div>
     <script src="./src/auth.js"></script>
     <script src="./src/send.js"></script>
+    <script src="./src/getDB.js"></script>
   </body>
 </html>
