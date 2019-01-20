@@ -36,6 +36,7 @@ document.getElementById("send").onclick = () => {
   } else {
     position = Math.round(Number(userPosition) / 10) * 10;
   }
+  url = url.replace(/\s+/g, "");
 
   db.collection("pclens")
     .add({
