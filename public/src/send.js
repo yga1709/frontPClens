@@ -34,7 +34,7 @@ document.getElementById("send").onclick = () => {
         break;
     }
   } else {
-    position = Number(userPosition);
+    position = Math.round(Number(userPosition) / 10) * 10;
   }
 
   db.collection("pclens")
