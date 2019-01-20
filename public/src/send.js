@@ -45,7 +45,7 @@ document.getElementById("send").onclick = () => {
       color: color,
       size: size,
       scroll: position,
-      uid: uid
+      userID: uid
     })
     .then(function(docRef) {
       console.log(name, comment, url, color, size, scroll, position, uid);
