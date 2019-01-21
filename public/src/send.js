@@ -37,7 +37,12 @@ document.getElementById("send").onclick = () => {
     success.message = "必要事項が入力されていません。";
     return 0;
   }
-
+  if (url === "pc-lens.firebaseapp.com") {
+    success.show = true;
+    success.success = false;
+    success.message = "コメント投稿サイトに直接コメントできません。";
+    return 0;
+  }
   if (userPosition === "") {
     switch (position) {
       case "top":
