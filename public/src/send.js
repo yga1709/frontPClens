@@ -38,16 +38,16 @@ document.getElementById("send").onclick = () => {
     return 0;
   }
 
-  if (userPosition === null) {
+  if (userPosition === "") {
     switch (position) {
-      case top:
+      case "top":
         position = 0;
         break;
-      case center:
-        position = 100;
-        break;
-      case buttom:
+      case "center":
         position = 500;
+        break;
+      case "buttom":
+        position = 1000;
         break;
     }
   } else {
