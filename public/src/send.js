@@ -84,7 +84,10 @@ errorCheck = (name, comment, url) => {
     errorMessage("コメント投稿サイトに直接コメントできません。");
     return false;
   }
-  if (/殺|ころす|死|4ね|しね|fuck/.test(comment)) {
+  if (comment.length >= 140) {
+    return false;
+  }
+  if (/殺|ころす|死|4ね|しね|fuck|キャトルミューティレーション/.test(comment)) {
     errorMessage("表示できない単語が含まれています。");
     return false;
   }
