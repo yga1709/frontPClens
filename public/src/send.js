@@ -41,6 +41,7 @@ document.getElementById("send").onclick = () => {
     success.show = true;
     success.success = false;
     success.message = "コメント投稿サイトに直接コメントできません。";
+    return 0;
   }
   if (userPosition === "") {
     switch (position) {
