@@ -28,6 +28,7 @@ document.getElementById("send").onclick = () => {
   const userPosition = document.getElementById("posiNum").value;
   const color = getColor.colorList.value;
   const size = getSize.sizeList.value;
+
   let position = getPosition.posiList.value;
 
   if (name === "" || comment === "" || url === "") {
@@ -70,6 +71,7 @@ document.getElementById("send").onclick = () => {
       success.success = true;
       let sendDate = new Date();
       oldSendTIme = sendDate.getTime();
+      document.getElementById("comment").value = "";
     })
     .catch(function(error) {
       console.error("Error adding document: ", error);
