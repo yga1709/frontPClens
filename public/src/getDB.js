@@ -5,19 +5,15 @@ var showComment = new Vue({
   },
   created: function() {
     var vue = this;
-    db.collection("pclens").onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(change => {
-        if (change.type === "added") {
-          vue.list.unshift(change.doc.data());
-        }
+    db.collection("pclens")
+      .orderBy("timestamp")
+      .limit(100)
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if (change.type === "added") {
+            vue.list.unshift(change.doc.data());
+          }
+        });
       });
-    });
   }
-});
-
-db.collection("pclens").onSnapshot(snapshot => {
-  snapshot.docChanges().forEach(change => {
-    if (change.type === "added") {
-    }
-  });
 });

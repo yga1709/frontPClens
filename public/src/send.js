@@ -1,13 +1,27 @@
+var oldSendTIme = null;
+
 window.onload = () => {
   console.log(uid, isAnonymous);
 };
+
 document.getElementById("send").onclick = () => {
+  if (oldSendTIme != null && !checkInterval()) {
+    success.show = true;
+    success.success = false;
+    success.message = "連続してコメントできません。10秒お待ちください。";
+    return 0;
+  }
   if (!isAnonymous) {
     return 0;
   }
   const name = document.getElementById("name").value;
   const comment = document.getElementById("comment").value;
-  const url = document.getElementById("url").value;
+  const url = document
+    .getElementById("url")
+    .value.replace(/\s+/g, "")
+    .replace("http://", "")
+    .replace("https://", "")
+    .replace(/\/$/, "");
   const getColor = document.getElementById("color");
   const getSize = document.getElementById("size");
   const getPosition = document.getElementById("position");
@@ -19,6 +33,8 @@ document.getElementById("send").onclick = () => {
   if (name === "" || comment === "" || url === "") {
     success.show = true;
     success.success = false;
+    success.message = "必要事項が入力されていません。";
+    return 0;
   }
 
   if (userPosition === null) {
@@ -36,7 +52,6 @@ document.getElementById("send").onclick = () => {
   } else {
     position = Math.round(Number(userPosition) / 10) * 10;
   }
-  url = url.replace(/\s+/g, "");
 
   db.collection("pclens")
     .add({
@@ -46,11 +61,15 @@ document.getElementById("send").onclick = () => {
       color: color,
       size: size,
       scroll: position,
-      userID: uid
+      userID: uid,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(function(docRef) {
       console.log(name, comment, url, color, size, scroll, position, uid);
       success.show = true;
+      success.success = true;
+      let sendDate = new Date();
+      oldSendTIme = sendDate.getTime();
     })
     .catch(function(error) {
       console.error("Error adding document: ", error);
@@ -71,3 +90,15 @@ const success = new Vue({
     success: true
   }
 });
+
+checkInterval = () => {
+  let now = new Date();
+  let newSendTime = now.getTime();
+  let diff = newSendTime - oldSendTIme;
+  const diffSecond = Math.floor(diff / 1000);
+  if (diffSecond >= 10) {
+    return true;
+  } else {
+    return false;
+  }
+};

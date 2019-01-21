@@ -9,6 +9,8 @@ const config = {
 firebase.initializeApp(config);
 
 var db = firebase.firestore();
+const settings = { timestampsInSnapshots: true };
+db.settings(settings);
 var isAnonymous;
 var uid;
 
