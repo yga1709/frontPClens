@@ -5,12 +5,6 @@ window.onload = () => {
 };
 
 document.getElementById("send").onclick = () => {
-  if (oldSendTIme != null && !checkInterval()) {
-    success.show = true;
-    success.success = false;
-    success.message = "連続してコメントできません。10秒お待ちください。";
-    return 0;
-  }
   if (!isAnonymous) {
     return 0;
   }
@@ -28,21 +22,12 @@ document.getElementById("send").onclick = () => {
   const userPosition = document.getElementById("posiNum").value;
   const color = getColor.colorList.value;
   const size = getSize.sizeList.value;
-
   let position = getPosition.posiList.value;
 
-  if (name === "" || comment === "" || url === "") {
-    success.show = true;
-    success.success = false;
-    success.message = "必要事項が入力されていません。";
+  if (!errorCheck(name, comment, url)) {
     return 0;
   }
-  if (url === "pc-lens.firebaseapp.com") {
-    success.show = true;
-    success.success = false;
-    success.message = "コメント投稿サイトに直接コメントできません。";
-    return 0;
-  }
+
   if (userPosition === "") {
     switch (position) {
       case "top":
@@ -84,6 +69,32 @@ document.getElementById("send").onclick = () => {
       success.success = false;
       success.message = error;
     });
+};
+
+errorCheck = (name, comment, url) => {
+  if (oldSendTIme != null && !checkInterval()) {
+    errorMessage("連続してコメントできません。10秒お待ちください。");
+    return false;
+  }
+  if (name === "" || comment === "" || url === "") {
+    errorMessage("必要事項が入力されていません。");
+    return false;
+  }
+  if (url === "pc-lens.firebaseapp.com") {
+    errorMessage("コメント投稿サイトに直接コメントできません。");
+    return false;
+  }
+  if (/殺|ころす|死|4ね|しね|fuck/.test(comment)) {
+    errorMessage("表示できない単語が含まれています。");
+    return false;
+  }
+  return true;
+};
+
+errorMessage = message => {
+  success.show = true;
+  success.success = false;
+  success.message = message;
 };
 
 const app = new Vue({
