@@ -38,6 +38,12 @@ document.getElementById("send").onclick = () => {
     return 0;
   }
 
+  if (url === "pc-lens.firebaseapp.com") {
+    success.show = true;
+    success.success = false;
+    success.message = "コメント投稿サイトに直接コメントできません。";
+  }
+
   if (userPosition === "") {
     switch (position) {
       case "top":
