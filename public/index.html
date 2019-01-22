@@ -15,6 +15,13 @@
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+      ul {
+        list-style: none;
+      }
+    </style>
+
     <title>PClens</title>
   </head>
 
@@ -27,7 +34,7 @@
         placeholder="URLを入力…"
         type="text"
         class="uk-input uk-width-1-2"
-        style="width:100px"
+        style="width:300px"
         id="url"
       /><br />
       <p>{{ message }}</p>
@@ -41,7 +48,7 @@
     /><br />
     コメント<br /><input
       type="text"
-      style="width:100px"
+      style="width:300px"
       class="uk-input"
       id="comment"
     /><br />
@@ -78,7 +85,12 @@
       />上部
       <input name="posiList" type="radio" class="uk-radio" value="center" />中央
       <input name="posiList" type="radio" class="uk-radio" value="bottom" />下部
-      <input name="posiNum" type="number" id="posiNum" />数値を指定する。
+      <input
+        name="posiNum"
+        type="number"
+        id="posiNum"
+        style="width: 50px"
+      />数値を指定する。
     </form>
 
     <input
@@ -99,14 +111,42 @@
         </div>
       </div>
     </div>
+
     <h1 class="uk-heading-bullet">コメント一覧（最新：100件）</h1>
+
     <div id="showComment">
-      <ul>
-        <li v-for="item in list">
-          {{ item.url }}<br />{{ item.name }}:{{ item.comment }}
+      <transition-group name="fade" tag="ul">
+        <li v-for="item in list" v-bind:key="item">
+          <article class="uk-comment uk-comment-primary">
+            <header
+              class="uk-comment-header uk-grid-medium uk-flex-middle"
+              uk-grid
+            >
+              <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove">
+                  <a class="uk-link-reset">{{ item.name }}</a>
+                </h4>
+                <ul
+                  class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top"
+                >
+                  <li>{{ item.viewTime }}</li>
+                  <li>
+                    <span class="uk-text-lowercase"
+                      ><a>{{ item.url }}</a></span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </header>
+            <div class="uk-comment-body">
+              <p>{{ item.comment }}</p>
+            </div>
+          </article>
+          <br />
         </li>
-      </ul>
+      </transition-group>
     </div>
+
     <script src="./src/auth.js"></script>
     <script src="./src/send.js"></script>
     <script src="./src/getDB.js"></script>

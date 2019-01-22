@@ -5,15 +5,11 @@ window.onload = () => {
 };
 
 document.getElementById("send").onclick = () => {
-  if (oldSendTIme != null && !checkInterval()) {
-    success.show = true;
-    success.success = false;
-    success.message = "連続してコメントできません。10秒お待ちください。";
-    return 0;
-  }
   if (!isAnonymous) {
     return 0;
   }
+  success.show = false;
+  const viewTime = getTime();
   const name = document.getElementById("name").value;
   const comment = document.getElementById("comment").value;
   const url = document
@@ -28,21 +24,12 @@ document.getElementById("send").onclick = () => {
   const userPosition = document.getElementById("posiNum").value;
   const color = getColor.colorList.value;
   const size = getSize.sizeList.value;
-
   let position = getPosition.posiList.value;
 
-  if (name === "" || comment === "" || url === "") {
-    success.show = true;
-    success.success = false;
-    success.message = "必要事項が入力されていません。";
+  if (!errorCheck(name, comment, url)) {
     return 0;
   }
-  if (url === "pc-lens.firebaseapp.com") {
-    success.show = true;
-    success.success = false;
-    success.message = "コメント投稿サイトに直接コメントできません。";
-    return 0;
-  }
+
   if (userPosition === "") {
     switch (position) {
       case "top":
@@ -68,6 +55,7 @@ document.getElementById("send").onclick = () => {
       size: size,
       scroll: position,
       userID: uid,
+      viewTime: viewTime,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(function(docRef) {
@@ -84,6 +72,42 @@ document.getElementById("send").onclick = () => {
       success.success = false;
       success.message = error;
     });
+};
+
+errorCheck = (name, comment, url) => {
+  if (oldSendTIme != null && !checkInterval()) {
+    errorMessage("連続してコメントできません。10秒お待ちください。");
+    return false;
+  }
+  if (name === "" || comment === "" || url === "") {
+    errorMessage("必要事項が入力されていません。");
+    return false;
+  }
+  if (url === "pc-lens.firebaseapp.com") {
+    errorMessage("コメント投稿サイトに直接コメントできません。");
+    return false;
+  }
+  if (comment.length >= 140) {
+    errorMessage("コメントが長すぎます。（制限：140字以下）");
+    return false;
+  }
+  if (name.length >= 20) {
+    errorMessage(
+      "名前が長すぎます。本名が長い方はニックネームを利用してください。"
+    );
+    return false;
+  }
+  if (/殺|ころす|死|4ね|しね|fuck|キャトルミューティレーション/.test(comment)) {
+    errorMessage("表示できない単語が含まれています。");
+    return false;
+  }
+  return true;
+};
+
+errorMessage = message => {
+  success.show = true;
+  success.success = false;
+  success.message = message;
 };
 
 const app = new Vue({
@@ -108,4 +132,21 @@ checkInterval = () => {
   } else {
     return false;
   }
+};
+
+getTime = () => {
+  let data = new Date();
+  //時・分・秒を取得する
+  let hour = data.getHours();
+  let minute = data.getMinutes();
+  let second = data.getSeconds();
+
+  //年・月・日・曜日を取得する
+  let time = new Date();
+  let year = time.getFullYear();
+  let month = time.getMonth() + 1;
+  let day = time.getDate();
+
+  let fileStamp = `${year}年${month}月${day}日${hour}時${minute}分${second}秒`;
+  return fileStamp;
 };
