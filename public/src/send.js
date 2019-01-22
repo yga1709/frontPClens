@@ -8,6 +8,7 @@ document.getElementById("send").onclick = () => {
   if (!isAnonymous) {
     return 0;
   }
+  success.show = false;
   const name = document.getElementById("name").value;
   const comment = document.getElementById("comment").value;
   const url = document
@@ -85,6 +86,13 @@ errorCheck = (name, comment, url) => {
     return false;
   }
   if (comment.length >= 140) {
+    errorMessage("コメントが長すぎます。（制限：140字以下）");
+    return false;
+  }
+  if (name.length >= 20) {
+    errorMessage(
+      "名前が長すぎます。本名が長い方はニックネームを利用してください。"
+    );
     return false;
   }
   if (/殺|ころす|死|4ね|しね|fuck|キャトルミューティレーション/.test(comment)) {

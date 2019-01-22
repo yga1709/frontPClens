@@ -99,14 +99,40 @@
         </div>
       </div>
     </div>
+
     <h1 class="uk-heading-bullet">コメント一覧（最新：100件）</h1>
+
     <div id="showComment">
       <ul>
         <li v-for="item in list">
-          {{ item.url }}<br />{{ item.name }}:{{ item.comment }}
+          <article class="uk-comment uk-comment-primary">
+            <header
+              class="uk-comment-header uk-grid-medium uk-flex-middle"
+              uk-grid
+            >
+              <div class="uk-width-expand">
+                <h4 class="uk-comment-title uk-margin-remove">
+                  <a class="uk-link-reset">{{ item.name }}</a>
+                </h4>
+                <ul
+                  class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top"
+                >
+                  <li>{{ item.timestamp.toDate() }}</li>
+                  <li>
+                    <a href="#">{{ item.url }}</a>
+                  </li>
+                </ul>
+              </div>
+            </header>
+            <div class="uk-comment-body">
+              <p>{{ item.comment }}</p>
+            </div>
+          </article>
+          <br />
         </li>
       </ul>
     </div>
+
     <script src="./src/auth.js"></script>
     <script src="./src/send.js"></script>
     <script src="./src/getDB.js"></script>
