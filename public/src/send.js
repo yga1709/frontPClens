@@ -9,6 +9,7 @@ document.getElementById("send").onclick = () => {
     return 0;
   }
   success.show = false;
+  const viewTime = getTime();
   const name = document.getElementById("name").value;
   const comment = document.getElementById("comment").value;
   const url = document
@@ -54,6 +55,7 @@ document.getElementById("send").onclick = () => {
       size: size,
       scroll: position,
       userID: uid,
+      viewTime: viewTime,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(function(docRef) {
@@ -130,4 +132,21 @@ checkInterval = () => {
   } else {
     return false;
   }
+};
+
+getTime = () => {
+  let data = new Date();
+  //時・分・秒を取得する
+  let hour = data.getHours();
+  let minute = data.getMinutes();
+  let second = data.getSeconds();
+
+  //年・月・日・曜日を取得する
+  let time = new Date();
+  let year = time.getFullYear();
+  let month = time.getMonth() + 1;
+  let day = time.getDate();
+
+  let fileStamp = `${year}年${month}月${day}日${hour}時${minute}分${second}秒`;
+  return fileStamp;
 };
