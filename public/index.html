@@ -26,8 +26,20 @@
   </head>
 
   <body>
-    <h1 class="uk-heading-bullet">PC-lens</h1>
-    <br />
+
+    <nav class="uk-navbar-container uk-margin" uk-navbar>
+      <div class="uk-navbar-left">
+        <a class="uk-navbar-item uk-logo">P.C.Lens</a>
+
+        <ul class="uk-navbar-nav">
+          <li><a href="#">使い方</a></li>
+        </ul>
+
+        <ul class="uk-navbar-nav">
+          <li><a href="#">拡張機能</a></li>
+        </ul>
+    </nav>
+
     <span id="checkURL">
       URL<br /><input
         v-model="message"
@@ -58,11 +70,13 @@
         type="radio"
         class="uk-radio"
         value="#000000"
+        style="background-color: #000000"
         checked
       />黒
-      <input name="colorList" type="radio" class="uk-radio" value="#ffffff" />白
-      <input name="colorList" type="radio" class="uk-radio" value="#ff0000" />赤
-      <input name="colorList" type="radio" class="uk-radio" value="#0000ff" />青
+      <input name="colorList" type="radio" class="uk-radio" value="#ffffff" style="background-color: rgb(200, 200, 200)" />白
+      <input name="colorList" type="radio" class="uk-radio" value="#ff0000" style="background-color: #ff0000" />赤
+      <input name="colorList" type="radio" class="uk-radio" value="#0000ff" style="background-color: #0000ff" />青
+      <input name="colorList" type="radio" class="uk-radio" value="#00ff00" style="background-color: #00ff00" />緑
     </form>
     <form id="size">
       <input
@@ -115,9 +129,9 @@
     <h1 class="uk-heading-bullet">コメント一覧（最新：100件）</h1>
 
     <div id="showComment">
-      <transition-group name="fade" tag="ul">
+      <ul>
         <li v-for="item in list" v-bind:key="item">
-          <article class="uk-comment uk-comment-primary">
+          <article class="uk-comment uk-comment-primary" style="width: 80%">
             <header
               class="uk-comment-header uk-grid-medium uk-flex-middle"
               uk-grid
@@ -146,7 +160,7 @@
           </article>
           <br />
         </li>
-      </transition-group>
+      </ul>
     </div>
 
     <script src="./src/auth.js"></script>
