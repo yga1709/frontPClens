@@ -124,7 +124,7 @@
             >
               <div class="uk-width-expand">
                 <h4 class="uk-comment-title uk-margin-remove">
-                  <a class="uk-link-reset">{{ item.name }}</a>
+                  {{ item.name }}
                 </h4>
                 <ul
                   class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top"
@@ -132,7 +132,9 @@
                   <li>{{ item.viewTime }}</li>
                   <li>
                     <span class="uk-text-lowercase"
-                      ><a>{{ item.url }}</a></span
+                      ><a v-bind:href="'https://' + item.url">{{
+                        item.url
+                      }}</a></span
                     >
                   </li>
                 </ul>
