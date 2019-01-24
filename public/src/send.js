@@ -147,18 +147,18 @@ checkInterval = () => {
 };
 
 getTime = () => {
-  let data = new Date();
+  const data = new Date();
   //時・分・秒を取得する
-  let hour = data.getHours();
-  let minute = data.getMinutes();
-  let second = data.getSeconds();
+  const hour = data.getHours();
+  const minute = data.getMinutes();
+  const second = data.getSeconds();
 
   //年・月・日・曜日を取得する
-  let time = new Date();
-  let year = time.getFullYear();
-  let month = time.getMonth() + 1;
-  let day = time.getDate();
+  const time = new Date();
+  const year = time.getFullYear();
+  const month = time.getMonth() + 1;
+  const day = time.getDate();
 
-  let fileStamp = `${year}年${month}月${day}日${hour}時${minute}分${second}秒`;
+  const fileStamp = `${year}年${month}月${day}日${hour}時${minute}分${second}秒`;
   return fileStamp;
 };
