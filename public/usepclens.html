@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8" />
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/js/uikit.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.2/js/uikit-icons.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <style>
+            ul {
+                list-style: none;
+            }
+        </style>
+
+        <title>PClens</title>
+    </head>
+
+    <body>
+
+        <nav class="uk-navbar-container uk-margin" uk-navbar>
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="./index.html">P.C.Lens</a>
+
+                <ul class="uk-navbar-nav">
+                    <li><a href="./usepclens.html">使い方</a></li>
+                </ul>
+
+                <ul class="uk-navbar-nav">
+                    <li><a href="https://github.com/yga1709/ExtViewPCLens">拡張機能</a></li>
+                </ul>
+        </nav>
+        <script src="./src/auth.js"></script>
+        <script src="./src/send.js"></script>
+        <script src="./src/getDB.js"></script>
+    </body>
+        
+</html>
