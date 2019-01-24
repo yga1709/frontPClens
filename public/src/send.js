@@ -12,12 +12,7 @@ document.getElementById("send").onclick = () => {
   const viewTime = getTime();
   const name = document.getElementById("name").value;
   const comment = document.getElementById("comment").value;
-  const url = document
-    .getElementById("url")
-    .value.replace(/\s+/g, "")
-    .replace("http://", "")
-    .replace("https://", "")
-    .replace(/\/$/, "");
+  const url = parseUrl(document.getElementById("url").value);
   const getColor = document.getElementById("color");
   const getSize = document.getElementById("size");
   const getPosition = document.getElementById("position");
@@ -108,6 +103,23 @@ errorMessage = message => {
   success.show = true;
   success.success = false;
   success.message = message;
+};
+
+parseUrl = address => {
+  let parse = address
+    .replace(/\s+/g, "")
+    .replace("http://", "")
+    .replace("https://", "")
+    .replace(/\/$/, "");
+  let deleteString;
+  let resultUrl;
+  if (parse.indexOf("?") >= 0) {
+    deleteString = parse.substring(parse.indexOf("?"), parse.length);
+    resultUrl = parse.replace(deleteString, "");
+  } else {
+    resultUrl = parse;
+  }
+  return resultUrl;
 };
 
 const app = new Vue({
