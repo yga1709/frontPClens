@@ -110,16 +110,9 @@ parseUrl = address => {
     .replace(/\s+/g, "")
     .replace("http://", "")
     .replace("https://", "")
-    .replace(/\/$/, "");
-  let deleteString;
-  let resultUrl;
-  if (parse.indexOf("?") >= 0) {
-    deleteString = parse.substring(parse.indexOf("?"), parse.length);
-    resultUrl = parse.replace(deleteString, "");
-  } else {
-    resultUrl = parse;
-  }
-  return resultUrl;
+    .replace(/\/$/, "")
+    .replace(";", "");
+  return parse;
 };
 
 const app = new Vue({
