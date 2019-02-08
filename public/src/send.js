@@ -78,7 +78,7 @@ errorCheck = (name, comment, url) => {
     errorMessage("必要事項が入力されていません。");
     return false;
   }
-  if (url === "pc-lens.firebaseapp.com") {
+  if (/pc-lens/.test(url)) {
     errorMessage("コメント投稿サイトに直接コメントできません。");
     return false;
   }
